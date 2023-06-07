@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">final_movie_app</string>
+    <string name="login">login</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Register</string>
+    <string name="Register">Register</string>
+    <string name="Login">Login</string>
+</resources>
