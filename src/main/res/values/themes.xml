@@ -2,4 +2,19 @@
 <resources>
 
     <style name="Theme.Final_movie_app" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Customize your light theme here. -->
+    <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+
+<style name="Theme.Final_movie_app." parent="Theme.Final_movie_app" />
+
+<style name="Theme.Final_movie_app.NoActionBar">
+<item name="windowActionBar">false</item>
+<item name="windowNoTitle">true</item>
+</style>
+
+<style name="Theme.Final_movie_app.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+<style name="Theme.Final_movie_app.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

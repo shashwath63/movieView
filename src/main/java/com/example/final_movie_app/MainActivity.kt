@@ -1,46 +1,70 @@
 package com.example.final_movie_app
-
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.final_movie_app.ui.theme.Final_movie_appTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.final_movie_app.R
+import com.example.final_movie_app.ui.theme.Movie
+import com.example.final_movie_app.ui.theme.MovieAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import okhttp3.*
+import java.io.IOException
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var movieRecyclerView: RecyclerView
+    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Final_movie_appTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+        setContentView(R.layout.activity_main)
+
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        if (firebaseAuth.currentUser == null) {
+            startActivity(Intent(this, login::class.java))
+            finish()
+            return
+        }
+
+        movieRecyclerView = findViewById(R.id.movie_recycler_view)
+        movieRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        fetchMovies()
+    }
+
+    private fun fetchMovies() {
+        val apiKey = "34025e173cec2072f6773de93a208c74"
+        val url = "https://api.themoviedb.org/3/movie/popular?api_key=$apiKey"
+
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                if (responseBody != null) {
+                    val gson = Gson()
+                    val movieListType = object : TypeToken<List<Movie>>() {}.type
+                    val movies: List<Movie> = gson.fromJson(responseBody, movieListType)
+
+                    runOnUiThread {
+                        movieAdapter = MovieAdapter(movies)
+                        movieRecyclerView.adapter = movieAdapter
+                    }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Final_movie_appTheme {
-        Greeting("Android")
+        })
     }
 }

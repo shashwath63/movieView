@@ -3,6 +3,7 @@ package com.example.final_movie_app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -35,6 +36,7 @@ class login : AppCompatActivity() {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     } else {
                         Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
                     }
@@ -46,4 +48,6 @@ class login : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    fun register(view: View) {}
 }
