@@ -1,5 +1,7 @@
 package com.example.final_movie_app.ui.theme
 
+import ReviewActivity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.final_movie_app.R
+import com.example.final_movie_app.ReviewActivity
 
 class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -28,7 +31,13 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
         holder.movieTitle.text = movie.title
         holder.movieReleaseDate.text = movie.releaseDate
         holder.movieOverview.text = movie.overview
+        val currentMovie = movies[position]
 
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ReviewActivity::class.java)
+            intent.putExtra("review", currentMovie.review) // Pass the review details
+            holder.itemView.context.startActivity(intent)
+        }
         Glide.with(holder.itemView.context)
             .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
             .into(holder.moviePoster)
@@ -37,4 +46,5 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
     override fun getItemCount(): Int {
         return movies.size
     }
+
 }

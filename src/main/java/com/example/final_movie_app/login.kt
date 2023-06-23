@@ -49,5 +49,5 @@ class login : AppCompatActivity() {
         }
     }
 
-    fun register(view: View) {}
+    //fun register(view: View) {}
 }
