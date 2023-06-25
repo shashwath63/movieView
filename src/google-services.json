@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1074562236214",
+    "firebase_url": "https://moviesapp-6f77c-default-rtdb.firebaseio.com",
+    "project_id": "moviesapp-6f77c",
+    "storage_bucket": "moviesapp-6f77c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074562236214:android:09aae33838b0550cd6fd97",
+        "android_client_info": {
+          "package_name": "com.example.final_movie_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074562236214-dd3nfjc0akbfh4ekfq8jfob6uet34mb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyRwy-IYjuLV7tQaNKoF5jdc5SADLRdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074562236214-dd3nfjc0akbfh4ekfq8jfob6uet34mb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074562236214:android:57d16cfe5ed2aefcd6fd97",
+        "android_client_info": {
+          "package_name": "com.example.moviesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074562236214-dd3nfjc0akbfh4ekfq8jfob6uet34mb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyRwy-IYjuLV7tQaNKoF5jdc5SADLRdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074562236214-dd3nfjc0akbfh4ekfq8jfob6uet34mb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074562236214:android:6e2df41e5f05519ed6fd97",
+        "android_client_info": {
+          "package_name": "com.example.movieviewapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074562236214-dd3nfjc0akbfh4ekfq8jfob6uet34mb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyRwy-IYjuLV7tQaNKoF5jdc5SADLRdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074562236214-dd3nfjc0akbfh4ekfq8jfob6uet34mb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

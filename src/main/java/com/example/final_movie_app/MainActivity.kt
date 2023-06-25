@@ -1,90 +1,75 @@
 package com.example.final_movie_app
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.final_movie_app.adapter.MoviesAdapter
+import com.example.final_movie_app.Api.ApiServices
+import com.example.final_movie_app.Api.ApiClient
+import com.example.final_movie_app.response.MoviesListResponse
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.final_movie_app.ui.theme.Movie
-import com.example.final_movie_app.ui.theme.MovieAdapter
-import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
-import java.io.IOException
+import com.example.final_movie_app.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var movieRecyclerView: RecyclerView
-    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var binding: ActivityMainBinding
+
+    private val moviesAdapter by lazy { MoviesAdapter() }
+
+    private val api: ApiServices by lazy {
+        ApiClient().getClient().create(ApiServices::class.java)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        movieRecyclerView = findViewById(R.id.movie_recycler_view)
-        movieRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        fetchMovies()
-    }
-
-    private fun fetchMovies() {
-        val apiKey = "34025e173cec2072f6773de93a208c74"
-        val baseUrl = "https://api.themoviedb.org/3/"
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-
-            .client(OkHttpClient())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val movieService = retrofit.create(MovieService::class.java)
-        val call = movieService.getPopularMovies(apiKey)
-
-        call.enqueue(object : retrofit2.Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                if (response.isSuccessful) {
-                    val movies = response.body()?.results ?: emptyList()
-                    movieAdapter = MovieAdapter(movies)
-                    movieRecyclerView.adapter = movieAdapter
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //InitViews
+        binding.apply {
+            //show loading
+            prgBarMovies.visibility = View.VISIBLE
+            //Call movies api
+            val callMoviesApi = api.getPopularMovie(1)
+            callMoviesApi.enqueue(object : Callback<MoviesListResponse> {
+                override fun onResponse(call: Call<MoviesListResponse>, response: Response<MoviesListResponse>) {
+                    prgBarMovies.visibility = View.GONE
+                    when (response.code()) {
+                        in 200..299 -> {
+                            Log.d("Response Code", " success messages : ${response.code()}")
+                            response.body()?.let { itBody ->
+                                itBody.results.let { itData ->
+                                    if (itData.isNotEmpty()) {
+                                        moviesAdapter.differ.submitList(itData)
+                                        //Recycler
+                                        rlMovies.apply {
+                                            layoutManager = LinearLayoutManager(this@MainActivity)
+                                            adapter = moviesAdapter
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        in 300..399 -> {
+                            Log.d("Response Code", " Redirection messages : ${response.code()}")
+                        }
+                        in 400..499 -> {
+                            Log.d("Response Code", " Client error responses : ${response.code()}")
+                        }
+                        in 500..599 -> {
+                            Log.d("Response Code", " Server error responses : ${response.code()}")
+                        }
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-
-
-
+                override fun onFailure(call: Call<MoviesListResponse>, t: Throwable) {
+                    prgBarMovies.visibility = View.GONE
+                    Log.e("onFailure", "Err : ${t.message}")
+                }
+            })
+        }
     }
 }
-
-// Retrofit Service Interface
-interface MovieService {
-    @GET("movie/popular")
-    fun getPopularMovies(@Query("api_key") apiKey: String): Call<MovieResponse>
-}
-
-// Response Model for Movie List
-data class MovieResponse(
-    @SerializedName("results")
-    val results: List<Movie>
-)
-
-// Movie Model
-data class Movie(
-    @SerializedName("title")
-    val title: String,
-    @SerializedName("overview")
-    val overview: String,
-    @SerializedName("poster_path")
-    val posterPath: String
-)

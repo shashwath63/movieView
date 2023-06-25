@@ -16,5 +16,8 @@
 <style name="Theme.Final_movie_app.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 <style name="Theme.Final_movie_app.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
 </resources>
