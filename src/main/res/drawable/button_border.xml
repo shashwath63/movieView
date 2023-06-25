@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" /> <!-- Set the background color to transparent -->
+    <stroke
+        android:width="2dp"
+        android:color="#8A2BE2" /> <!-- Set the border color to your desired dark purple color -->
+    <corners android:radius="8dp" /> <!-- Adjust the radius to control the roundness of the button corners -->
+</shape>
