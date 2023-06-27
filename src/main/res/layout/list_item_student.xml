@@ -1,0 +1,25 @@
+<!-- list_item_student.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/Sandy_Tan"
+        android:layout_gravity="center"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tv_usn"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/Sandy_Tan"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+</LinearLayout>

@@ -143,6 +143,7 @@
     <string name="hello_world">Hello World</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="popular_movies1">Popular Movies</string>
-    <string name="MovieView" >MovieView</string>
+    <string name="MovieView">MovieView</string>
     <string name="write_your_review">Write your review...</string>
+    <string name="Email" />
 </resources>

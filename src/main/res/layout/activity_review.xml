@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/reviewEditText"
         android:layout_width="384dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/purple"
         android:hint="@string/write_your_review"
         android:padding="8dp"
@@ -29,15 +29,15 @@
 
     <ScrollView
         android:layout_width="378dp"
-        android:layout_height="27dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/Sandy_Tan"
             android:background="@drawable/bg_details"
+            android:backgroundTint="@color/white"
             android:padding="8dp">
 
             <LinearLayout
