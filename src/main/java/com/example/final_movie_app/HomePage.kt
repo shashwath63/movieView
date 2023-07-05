@@ -32,7 +32,7 @@ class HomePage : AppCompatActivity() {
             Student("Jss academy of technical education,","Bangalore"),
             Student("Shashwath BN", "1JS20CS148"),
             Student("Sharath kumar HV", "1JS20CS147"),
-            Student("Under the guidence of : Namitha SJ "," ")
+            Student("Under the guidence of  ","Namitha SJ")
         )
 
         adapter = StudentAdapter(students)

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="15dp"
     android:gravity="top"
-    android:background="@drawable/login_background"
+    android:background="@color/white"
     tools:context=".register">
 
     <!-- Title -->
