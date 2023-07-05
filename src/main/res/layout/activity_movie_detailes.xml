@@ -237,6 +237,28 @@
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMovieOverviewTitle" />
+                <TextView
+                    android:id="@+id/tvYourReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Your Review:"
+                    android:textColor="@color/Sandy_Tan"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMovieOverview" />
+
+                <TextView
+                    android:id="@+id/tvReviewData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="review ........."
+                    android:textColor="@color/Sandy_Tan"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvYourReview" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

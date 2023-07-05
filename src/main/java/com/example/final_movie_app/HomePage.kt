@@ -1,5 +1,28 @@
 package com.example.final_movie_app
 
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+
+class HomePage : AppCompatActivity() {
+    private lateinit var startProjectButton: Button
+    private lateinit var quitButton: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
+
+        startProjectButton = findViewById(R.id.startProjectButton)
+        startProjectButton.setOnClickListener {
+            val intent = Intent(this, login::class.java)
+            startActivity(intent)
+        }
+    }
+}
+
+/*
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,3 +94,4 @@ class StudentAdapter(private val students: List<Student>) :
     }
 
 }
+*/

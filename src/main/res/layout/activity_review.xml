@@ -10,7 +10,7 @@
 
     <EditText
         android:id="@+id/reviewEditText"
-        android:layout_width="384dp"
+        android:layout_width="374dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple"
         android:hint="@string/write_your_review"
@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/purple"
         android:text="Add"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/purple"/>
+        android:textColor="@android:color/white" />
 
     <ScrollView
         android:layout_width="378dp"
