@@ -102,6 +102,17 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     // Firebase Firestore
     implementation 'com.google.firebase:firebase-firestore:24.6.1'
+    // Firebase Firestore
+    implementation 'com.google.firebase:firebase-firestore:23.0.3'
+
+    // Firebase Authentication (if you need authentication functionality)
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+
+    // Firebase Core (required for all Firebase services)
+    implementation 'com.google.firebase:firebase-core:19.0.1'
+
+    // Firebase UI (optional, for UI components and convenience methods)
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
 
     // Youtube Player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28'

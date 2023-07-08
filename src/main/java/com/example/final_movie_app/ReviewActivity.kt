@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -32,7 +33,10 @@ class ReviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review)
-
+        val leftArrowButton = findViewById<ImageButton>(R.id.leftArrowButton)
+        leftArrowButton.setOnClickListener {
+            finish() // Go back to the previous activity
+        }
         // Initialize Firebase
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -71,15 +75,16 @@ class ReviewActivity : AppCompatActivity() {
         }
 
         // Retrieve and display the review data from Firestore
-        retrieveReviewData(currentUserId)
+        retrieveReviewData(currentUserId, reviewId)
 
         // Add review button click listener
         addReviewButton.setOnClickListener {
             val reviewText = reviewEditText.text.toString().trim()
             if (reviewText.isNotEmpty()) {
-                // Save the review to Firestore
-                val review = Review(currentUserId!!, reviewText)
-                firestore.collection("reviews").document(reviewId!!)
+                // Save the review to Firestore with the current user ID and review ID
+                val review = Review(currentUserId!!, reviewText, reviewId!!)
+                firestore.collection("reviews")
+                    .document(reviewId!!)
                     .set(review)
                     .addOnSuccessListener {
                         reviewEditText.text.clear()
@@ -103,12 +108,13 @@ class ReviewActivity : AppCompatActivity() {
             }
         }
 
+
         // Update button click listener
         updateButton.setOnClickListener {
             val reviewText = reviewEditText.text.toString().trim()
             if (reviewText.isNotEmpty()) {
                 // Update the review in Firestore
-                val review = Review(currentUserId!!, reviewText)
+                val review = Review(currentUserId!!, reviewText, reviewId!!)
                 firestore.collection("reviews").document(reviewId!!)
                     .set(review)
                     .addOnSuccessListener {
@@ -143,8 +149,8 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
-    private fun retrieveReviewData(currentUserId: String?) {
-        // Retrieve the review data from Firestore
+    private fun retrieveReviewData(currentUserId: String?, reviewId: String?) {
+        // Retrieve the review data from Firestore based on the review ID
         firestore.collection("reviews").document(reviewId!!)
             .get()
             .addOnSuccessListener { documentSnapshot ->
@@ -153,20 +159,14 @@ class ReviewActivity : AppCompatActivity() {
                     // Set the existing review text in the EditText
                     reviewEditText.setText(review.reviewText)
 
-                    // Show update and delete buttons if the current user wrote the review
-                    if (review.userId == currentUserId) {
-                        updateButton.visibility = View.VISIBLE
-                        deleteButton.visibility = View.VISIBLE
-                    } else {
-                        // Show add review button if no review is found
-                        addReviewButton.visibility = View.VISIBLE
-                    }
+                    // Show update and delete buttons
+                    updateButton.visibility = View.VISIBLE
+                    deleteButton.visibility = View.VISIBLE
+                    addReviewButton.visibility = View.GONE
                 } else {
-                    // Hide the update and delete buttons
+                    // No review found, show add review button
                     updateButton.visibility = View.GONE
                     deleteButton.visibility = View.GONE
-
-                    // Show the add review button
                     addReviewButton.visibility = View.VISIBLE
                 }
             }
@@ -174,7 +174,6 @@ class ReviewActivity : AppCompatActivity() {
                 showToast("Error: ${exception.message}")
             }
     }
-
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

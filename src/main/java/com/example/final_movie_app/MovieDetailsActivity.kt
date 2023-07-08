@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieDetailesActivity : AppCompatActivity() {
+class MovieDetailsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMovieDetailesBinding
 
@@ -27,6 +27,10 @@ class MovieDetailesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.leftArrowButton.setOnClickListener {
+            finish() // Go back to the previous activity
+        }
+
         val movieId: Int = intent.getIntExtra("id", 1)
         binding.apply {
             //show loading
@@ -35,6 +39,7 @@ class MovieDetailesActivity : AppCompatActivity() {
             val callMoviesApi = api.getMovieDetails(movieId)
             callMoviesApi.enqueue(object : Callback<MovieDetails> {
                 override fun onResponse(call: Call<MovieDetails>, response: Response<MovieDetails>) {
+
                     Log.e("onFailure", "Err : ${response.code()}")
                     prgBarMovies.visibility = View.GONE
                     when (response.code()) {
@@ -69,6 +74,9 @@ class MovieDetailesActivity : AppCompatActivity() {
                                 tvMovieBudget.text = itBody.budget.toString()
                                 tvMovieRevenue.text = itBody.revenue.toString()
                                 tvMovieOverview.text = itBody.overview
+                                // Retrieve the added review text from the intent extras
+                                val reviewText: String? = intent.getStringExtra("reviewText")
+                                tvReviewData.text = reviewText
                             }
                         }
 

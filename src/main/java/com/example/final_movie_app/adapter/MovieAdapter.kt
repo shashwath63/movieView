@@ -1,7 +1,6 @@
 package com.example.final_movie_app.adapter
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
-import com.example.final_movie_app.MovieDetailesActivity
+import com.example.final_movie_app.MovieDetailsActivity
 import com.example.final_movie_app.R
 import com.example.final_movie_app.databinding.ItemMoviesBinding
 import com.example.final_movie_app.response.MoviesListResponse
