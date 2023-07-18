@@ -1,6 +1,7 @@
 package com.example.final_movie_app
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,7 @@ class ReviewActivity : AppCompatActivity() {
     private lateinit var reviewContainer: LinearLayout
     private lateinit var updateButton: Button
     private lateinit var deleteButton: Button
+    private lateinit var logoutButton: Button
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
@@ -42,6 +44,14 @@ class ReviewActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser
 
+        logoutButton = findViewById(R.id.logoutButton)
+        logoutButton.setOnClickListener {
+            // Log out the user and navigate to the login activity
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, login::class.java)
+            startActivity(intent)
+            finish()
+        }
         // Get current user ID
         val currentUserId = currentUser?.uid
 
